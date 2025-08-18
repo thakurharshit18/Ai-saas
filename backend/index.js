@@ -12,14 +12,17 @@ const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 app.post("/ask", async (req, res) => {
   try {
-    const { question } = req.body;
+    const { question,style } = req.body;
 
+
+    const tweetStyle = style || "humourous,sarcastic,funny";
     // Get the model
     const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" }); 
     // You can also use "gemini-1.5-pro" if you need better quality
 
     // Send prompt
-    const result = await model.generateContent(question);
+    const prompt =    `you are a Ai tweet Generator always write in the style ${tweetStyle}. keep it short  userPrompt is the prompt you have to customize according to the tweet style ${question}`
+    const result = await model.generateContent(prompt);
 
     // Return answer
     res.json({ answer: result.response.text() });
@@ -29,6 +32,6 @@ app.post("/ask", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Server is running on http://localhost:3000");
+app.listen(3002, () => {
+  console.log("🚀 Server is running on http://localhost:3002");
 });
