@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { X } from "lucide-react";
+import { X, Star } from "lucide-react";
 import axios from "axios";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 
@@ -35,14 +35,30 @@ export default function HeroSection() {
     router.push("https://x.com/compose/post");
   };
 
+  const handleGithubStar = () => {
+    window.open("https://github.com/thakurharshit18/Ai-saas", "_blank");
+  };
+
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center justify-center px-4 py-8 sm:py-12">
-      {/* Title */}
+    <div className="bg-black min-h-screen flex flex-col items-center justify-center px-4 py-8 sm:py-12 relative">
+      <div className="absolute top-4 right-4 flex flex-col items-center space-y-1">
+        <button
+          onClick={handleGithubStar}
+          className="text-yellow-400 hover:text-yellow-500 transition"
+          aria-label="Star on GitHub"
+        >
+          <Star size={28} />
+        </button>
+        {/* ✅ Responsive text */}
+        <p className="text-[10px] sm:text-xs md:text-sm text-gray-400 text-center max-w-[100px] leading-snug">
+          Don’t forget to Star the repo
+        </p>
+      </div>
+
       <h2 className="mb-6 sm:mb-10 lg:mb-16 text-2xl sm:text-4xl lg:text-5xl text-center text-white font-extralight tracking-wide">
         Tweek My Tweet
       </h2>
 
-      {/* Input */}
       <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl">
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
@@ -51,7 +67,6 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Style Selector */}
       <div className="mt-6 sm:mt-8">
         <select
           id="tweetStyle"
@@ -69,7 +84,6 @@ export default function HeroSection() {
         </select>
       </div>
 
-      {/* Response */}
       {response && (
         <div className="mt-6 sm:mt-10 w-full max-w-lg sm:max-w-xl lg:max-w-2xl p-4 sm:p-6 border border-gray-700 rounded-xl bg-gray-900 shadow-md">
           <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
@@ -80,15 +94,6 @@ export default function HeroSection() {
           </p>
         </div>
       )}
-
-      {/* Optional Twitter Button */}
-      {/* <button
-        className="mt-6 flex items-center gap-2 text-white hover:text-blue-400 transition"
-        onClick={handletwitter}
-      >
-        <X size={20} />
-        Post to Twitter
-      </button> */}
     </div>
   );
 }
