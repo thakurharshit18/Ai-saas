@@ -20,7 +20,7 @@ export default function HeroSection() {
 
   const handlesubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:3002/ask", {
+      const res = await axios.post("https://ai-saas-4iua.onrender.com/ask", {
         question: query,
         style: tweetStyle
       });
